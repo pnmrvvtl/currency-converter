@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {CurrencyService} from "../../services";
+import { CurrencyService } from '../../services';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent implements OnInit {
-  inputValue: number = 1
-  outputValue: number = 1;
-  firstCurrency: string = 'UAH';
-  secondCurrency: string = 'USD';
+export class MainPage implements OnInit {
+  inputValue = 1;
+
+  outputValue = 1;
+
+  firstCurrency = 'UAH';
+
+  secondCurrency = 'USD';
 
   constructor(public currencyService: CurrencyService) {}
 
@@ -24,15 +27,15 @@ export class MainPageComponent implements OnInit {
     this.outputValue = this.currencyService.convertCurrency(
       this.inputValue,
       this.firstCurrency,
-      this.secondCurrency
+      this.secondCurrency,
     );
   }
 
   convertFromSecondCurrency() {
-    this.outputValue = this.currencyService.convertCurrency(
-      this.inputValue,
+    this.inputValue = this.currencyService.convertCurrency(
+      this.outputValue,
       this.secondCurrency,
-      this.firstCurrency
+      this.firstCurrency,
     );
   }
 }

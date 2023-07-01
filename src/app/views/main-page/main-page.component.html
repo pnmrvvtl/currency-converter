@@ -1,0 +1,23 @@
+<section class="converter">
+  <div class="converter__currency">
+    <input type="number" [(ngModel)]="inputValue" (ngModelChange)="convertFromFirstCurrency()" />
+    <select [(ngModel)]="firstCurrency" (ngModelChange)="convertFromFirstCurrency()">
+      <option value="UAH">UAH Ukraine, hryvna</option>
+      <option value="USD">USD USA, dollar</option>
+      <option value="EUR">EUR EU, Euro</option>
+      <option value="PLN">PLN Poland, zloty</option>
+      <option value="GBP">GBP Great Britain, Pound Sterling</option>
+    </select>
+  </div>
+
+  <div class="currency">
+    <input type="number" [(ngModel)]="outputValue" (ngModelChange)="convertFromSecondCurrency()" />
+    <select [(ngModel)]="secondCurrency" (ngModelChange)="convertFromSecondCurrency()">
+      <option value="UAH">UAH Ukraine, hryvna</option>
+      <option value="USD">USD USA, dollar</option>
+      <option value="EUR">EUR EU, Euro</option>
+      <option value="PLN">PLN Poland, zloty</option>
+      <option value="GBP">GBP Great Britain, Pound Sterling</option>
+    </select>
+  </div>
+</section>

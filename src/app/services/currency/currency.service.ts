@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {ExchangeRate, ExchangeRatesResponse} from "../../interfaces";
+import { ExchangeRate, ExchangeRatesResponse } from '../../interfaces';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export default class CurrencyService {
   private exchangeRates: ExchangeRate[] = [];
@@ -13,11 +14,15 @@ export default class CurrencyService {
 
   fetchExchangeRates(): Observable<void> {
     const API_KEY = '7dGVZ4lxFgsd56Ct9pqdMAeA0CMluLYlFHJ76y2n';
-    return this.http.get<ExchangeRatesResponse>(`https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&currencies=EUR%2CUSD%2CCAD&base_currency=UAH`)
+    return this.http
+      .get<ExchangeRatesResponse>(
+        `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}` +
+          `&currencies=EUR%2CUSD%2CCAD%2CPLN%2CGBP&base_currency=UAH`,
+      )
       .pipe(
-        map(data => {
+        map((data) => {
           this.exchangeRates = Object.values(data.data);
-        })
+        }),
       );
   }
 
@@ -25,12 +30,12 @@ export default class CurrencyService {
     const fromRate = this.getExchangeRate(fromCurrency);
     const toRate = this.getExchangeRate(toCurrency);
 
-    const uahValue = amount * fromRate;
-    return uahValue / toRate;
+    const sumValue = amount / fromRate;
+    return sumValue * toRate;
   }
 
   getExchangeRate(currency: string): number {
-    const exchangeRate = this.exchangeRates.find(rate => rate.code === currency);
+    const exchangeRate = this.exchangeRates.find((rate) => rate.code === currency);
     return exchangeRate ? exchangeRate.value : 1;
   }
 }

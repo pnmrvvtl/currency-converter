@@ -1,4 +1,4 @@
-import ExchangeRate from "./exchange-rate.interface";
-import ExchangeRatesResponse from "./exchange-rates-response.interface";
+import ExchangeRate from './exchange-rate.interface';
+import ExchangeRatesResponse from './exchange-rates-response.interface';
 
-export {ExchangeRatesResponse, ExchangeRate};
+export { ExchangeRatesResponse, ExchangeRate };

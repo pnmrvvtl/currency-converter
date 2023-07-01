@@ -1,31 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
-import {CurrencyService} from "./services";
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { AboutPageComponent } from './components/about-page/about-page.component';
+import { CurrencyService } from './services';
+import { Footer, Header } from './components';
+import { AboutPage, MainPage } from './views';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainPageComponent,
-    AboutPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+  declarations: [AppComponent, Header, Footer, MainPage, AboutPage],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [CurrencyService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

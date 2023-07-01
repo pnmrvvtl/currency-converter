@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {CurrencyService} from "../../services";
+import { CurrencyService } from '../../services';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  usdToUah: number = 1;
-  eurToUah: number = 1
+export class Header implements OnInit {
+  usdToUah = 1;
+
+  eurToUah = 1;
+
+  plnToUah = 1;
+
+  gbpToUah = 1;
 
   constructor(public currencyService: CurrencyService) {}
 
@@ -20,6 +25,8 @@ export class HeaderComponent implements OnInit {
     this.currencyService.fetchExchangeRates().subscribe(() => {
       this.usdToUah = this.currencyService.getExchangeRate('USD');
       this.eurToUah = this.currencyService.getExchangeRate('EUR');
+      this.plnToUah = this.currencyService.getExchangeRate('PLN');
+      this.gbpToUah = this.currencyService.getExchangeRate('GBP');
     });
   }
 }

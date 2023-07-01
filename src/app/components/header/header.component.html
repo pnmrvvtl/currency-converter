@@ -1,7 +1,19 @@
 <div class="header">
   <h1>Курс валют</h1>
-  <h2>1 USD = {{ usdToUah }} UAH</h2>
-  <h2>1 EUR = {{ eurToUah }} UAH</h2>
+  <div class="header__currency">
+    <ul>
+      <li>1 USD = {{ 1 / usdToUah | number: '1.2-2' }} UAH</li>
+      <li>1 EUR = {{ 1 / eurToUah | number: '1.2-2' }} UAH</li>
+      <li>1 PLN = {{ 1 / plnToUah | number: '2.2-2' }} UAH</li>
+      <li>1 GBP = {{ 1 / gbpToUah | number: '1.2-2' }} UAH</li>
+    </ul>
+    <ul>
+      <li>1 UAH = {{ usdToUah }} USD</li>
+      <li>1 UAH = {{ eurToUah }} EUR</li>
+      <li>1 UAH = {{ plnToUah }} PLN</li>
+      <li>1 UAH = {{ gbpToUah }} GBP</li>
+    </ul>
+  </div>
   <a routerLink="/" routerLinkActive="active">Main page</a>
-  <a routerLink="/cart" routerLinkActive="active">About</a>
+  <a routerLink="/about" routerLinkActive="active">About</a>
 </div>
