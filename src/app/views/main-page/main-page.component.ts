@@ -15,11 +15,20 @@ export class MainPage implements OnInit {
 
   secondCurrency = 'USD';
 
+  isLoading = true;
+
   constructor(public currencyService: CurrencyService) {}
 
   ngOnInit() {
-    this.currencyService.fetchExchangeRates().subscribe(() => {
-      this.convertFromFirstCurrency();
+    this.currencyService.fetchExchangeRates().subscribe({
+      next: () => {
+        this.convertFromFirstCurrency();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.log(error);
+      },
     });
   }
 

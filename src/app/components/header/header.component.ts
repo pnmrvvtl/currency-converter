@@ -15,6 +15,8 @@ export class Header implements OnInit {
 
   gbpToUah = 1;
 
+  isLoading = true;
+
   constructor(public currencyService: CurrencyService) {}
 
   ngOnInit() {
@@ -22,11 +24,18 @@ export class Header implements OnInit {
   }
 
   updateExchangeRates() {
-    this.currencyService.fetchExchangeRates().subscribe(() => {
-      this.usdToUah = this.currencyService.getExchangeRate('USD');
-      this.eurToUah = this.currencyService.getExchangeRate('EUR');
-      this.plnToUah = this.currencyService.getExchangeRate('PLN');
-      this.gbpToUah = this.currencyService.getExchangeRate('GBP');
+    this.currencyService.fetchExchangeRates().subscribe({
+      next: () => {
+        this.usdToUah = this.currencyService.getExchangeRate('USD');
+        this.eurToUah = this.currencyService.getExchangeRate('EUR');
+        this.plnToUah = this.currencyService.getExchangeRate('PLN');
+        this.gbpToUah = this.currencyService.getExchangeRate('GBP');
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.log(error);
+      },
     });
   }
 }

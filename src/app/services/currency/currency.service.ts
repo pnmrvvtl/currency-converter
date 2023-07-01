@@ -13,7 +13,7 @@ export default class CurrencyService {
   constructor(private http: HttpClient) {}
 
   fetchExchangeRates(): Observable<void> {
-    const API_KEY = '7dGVZ4lxFgsd56Ct9pqdMAeA0CMluLYlFHJ76y2n';
+    const API_KEY = /* '7dGVZ4lxFgsd56Ct9pqdMAeA0CMluLYlFHJ76y2n' */ '';
     return this.http
       .get<ExchangeRatesResponse>(
         `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}` +
