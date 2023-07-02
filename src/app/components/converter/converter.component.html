@@ -6,7 +6,7 @@
       <option *ngFor="let currency of currencies" [value]="currency.name">{{ currency.name }} {{ currency.description }}</option>
     </select>
   </div>
-  <p>=</p>
+  <img src="assets/images/equals.png" alt="UAH icon" width="40" height="40"/>
   <div class="converter__currency">
     <input type="number" [(ngModel)]="outputValue" (ngModelChange)="convertFromSecondCurrency()" />
     <select [(ngModel)]="secondCurrency" (ngModelChange)="convertFromSecondCurrency()">

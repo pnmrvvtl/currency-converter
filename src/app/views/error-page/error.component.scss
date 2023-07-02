@@ -1,0 +1,17 @@
+@import "../../../assets/styles/colors.scss";
+
+section {
+  font-size: 3rem;
+  text-align: center;
+  margin: 100px 0;
+
+  a {
+    color: $primary-color;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+}

@@ -7,7 +7,7 @@ import { ExchangeRate, ExchangeRatesResponse } from '../../interfaces';
 @Injectable({
   providedIn: 'root',
 })
-export default class CurrencyService {
+export class CurrencyService {
   private exchangeRates: ExchangeRate[] = [];
 
   constructor(private http: HttpClient) {}
@@ -19,7 +19,6 @@ export default class CurrencyService {
     nevertheless it's free for me. But in real project I'm going to hide sensitive
     data like that. */
     const API_KEY = '7dGVZ4lxFgsd56Ct9pqdMAeA0CMluLYlFHJ76y2n';
-    // const API_KEY = '';
     return this.http
       .get<ExchangeRatesResponse>(
         `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}` +
