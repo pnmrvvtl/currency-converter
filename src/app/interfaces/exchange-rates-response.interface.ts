@@ -1,3 +1,4 @@
+// types
 import ExchangeRate from './exchange-rate.interface';
 
 export default interface ExchangeRatesResponse {

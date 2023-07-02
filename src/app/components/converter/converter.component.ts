@@ -1,5 +1,8 @@
+// libs
 import { Component, OnInit } from '@angular/core';
+// services
 import { CurrencyService } from '../../services';
+// data
 import currencies from '../../../assets/currencies';
 
 @Component({
@@ -8,17 +11,19 @@ import currencies from '../../../assets/currencies';
   styleUrls: ['./converter.component.scss'],
 })
 export class Converter implements OnInit {
-  inputValue = 1;
+  inputValue = 100;
 
   outputValue = 1;
 
-  firstCurrency = 'UAH';
+  firstCurrency = 'USD';
 
-  secondCurrency = 'USD';
+  secondCurrency = 'UAH';
 
   isLoading = true;
 
   currencies = [...currencies, { name: 'UAH', description: 'Ukrainian hryvnia' }];
+
+  FRACTION_DIGITS = 2;
 
   constructor(public currencyService: CurrencyService) {}
 
@@ -36,18 +41,18 @@ export class Converter implements OnInit {
   }
 
   convertFromFirstCurrency() {
-    this.outputValue = this.currencyService.convertCurrency(
-      this.inputValue,
-      this.firstCurrency,
-      this.secondCurrency,
+    this.outputValue = Number(
+      this.currencyService
+        .convertCurrency(this.inputValue, this.firstCurrency, this.secondCurrency)
+        .toFixed(this.FRACTION_DIGITS),
     );
   }
 
   convertFromSecondCurrency() {
-    this.inputValue = this.currencyService.convertCurrency(
-      this.outputValue,
-      this.secondCurrency,
-      this.firstCurrency,
+    this.inputValue = Number(
+      this.currencyService
+        .convertCurrency(this.outputValue, this.secondCurrency, this.firstCurrency)
+        .toFixed(this.FRACTION_DIGITS),
     );
   }
 }

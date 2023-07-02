@@ -1,5 +1,8 @@
+// libs
 import { Component, OnInit } from '@angular/core';
+// services
 import { CurrencyService } from '../../services';
+// data
 import currencies from '../../../assets/currencies';
 
 @Component({

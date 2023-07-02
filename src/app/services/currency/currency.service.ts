@@ -1,8 +1,12 @@
+// libs
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+// types
 import { ExchangeRate, ExchangeRatesResponse } from '../../interfaces';
+// data
+import currencies from '../../../assets/currencies';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +26,7 @@ export class CurrencyService {
     return this.http
       .get<ExchangeRatesResponse>(
         `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}` +
-          `&currencies=EUR%2CUSD%2CCAD%2CPLN%2CGBP&base_currency=UAH`,
+          `&currencies=${currencies.map((el) => el.name).join('%2C')}&base_currency=UAH`,
       )
       .pipe(
         map((data) => {

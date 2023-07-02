@@ -1,6 +1,6 @@
 @import '../../../assets/styles/colors.scss';
 
-.footer {
+footer {
   background-color: $primary-color;
   box-sizing: border-box;
   border-radius: 50px   50px 0 0;
@@ -9,7 +9,7 @@
   text-align: center;
   position: fixed;
   bottom: 0;
-  color: $light-color;
+  color: $black-color;
   font-size: 2rem;
   box-shadow: 0px -3px 5px 5px rgba(0, 0, 0, 0.2);
 
