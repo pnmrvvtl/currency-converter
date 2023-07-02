@@ -9,11 +9,11 @@ import { AppComponent } from './app.component';
 // services
 import { CurrencyService } from './services';
 // components
-import { Footer, Header, Loader } from './components';
+import { Converter, Footer, Header, Loader } from './components';
 import { AboutPage, MainPage } from './views';
 
 @NgModule({
-  declarations: [AppComponent, Header, Footer, MainPage, AboutPage, Loader],
+  declarations: [AppComponent, Header, Footer, MainPage, AboutPage, Loader, Converter],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [CurrencyService],
   bootstrap: [AppComponent],
