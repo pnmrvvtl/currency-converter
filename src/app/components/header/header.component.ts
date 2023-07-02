@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from '../../services';
+import currencies from '../../../assets/currencies';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +8,9 @@ import { CurrencyService } from '../../services';
   styleUrls: ['./header.component.scss'],
 })
 export class Header implements OnInit {
-  usdToUah = 1;
+  currencies = currencies;
 
-  eurToUah = 1;
-
-  plnToUah = 1;
-
-  gbpToUah = 1;
+  exchangeRates: { [key: string]: number } = {};
 
   isLoading = true;
 
@@ -26,10 +23,9 @@ export class Header implements OnInit {
   updateExchangeRates() {
     this.currencyService.fetchExchangeRates().subscribe({
       next: () => {
-        this.usdToUah = this.currencyService.getExchangeRate('USD');
-        this.eurToUah = this.currencyService.getExchangeRate('EUR');
-        this.plnToUah = this.currencyService.getExchangeRate('PLN');
-        this.gbpToUah = this.currencyService.getExchangeRate('GBP');
+        this.currencies.forEach((currency) => {
+          this.exchangeRates[currency.name] = this.currencyService.getExchangeRate(currency.name);
+        });
         this.isLoading = false;
       },
       error: (error) => {

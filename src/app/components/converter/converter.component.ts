@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from '../../services';
+import currencies from '../../../assets/currencies';
 
 @Component({
   selector: 'app-converter',
@@ -16,6 +17,8 @@ export class Converter implements OnInit {
   secondCurrency = 'USD';
 
   isLoading = true;
+
+  currencies = [...currencies, { name: 'UAH', description: 'Ukrainian hryvnia' }];
 
   constructor(public currencyService: CurrencyService) {}
 
