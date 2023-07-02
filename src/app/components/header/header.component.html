@@ -1,24 +1,26 @@
 <header>
   <nav>
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Converter</a>
-    <ul *ngIf="!isLoading">
-      <li *ngFor="let currency of currencies">
-        1 {{ currency.name }}
-        <img [src]="'assets/images/' + currency.name + '.png'"
-             [alt]="currency.name + 'icon'" width="24" height="24"/>
-        = {{ 1 / exchangeRates[currency.name] | number: '2.2-2' }} UAH
-        <img src="assets/images/UAH.png" alt="" width="24" height="24"/>
-      </li>
-    </ul>
-    <ul *ngIf="!isLoading">
-      <li *ngFor="let currency of currencies">
-        1 UAH
-        <img src="assets/images/UAH.png" alt="UAH icon" width="24" height="24"/>
-        = {{ exchangeRates[currency.name] }} {{ currency.name }}
-        <img [src]="'assets/images/' + currency.name + '.png'"
-             [alt]="currency.name + 'icon'" width="24" height="24"/>
-      </li>
-    </ul>
+    <div class="rates" *ngIf="!isLoading">
+      <ul>
+        <li *ngFor="let currency of currencies">
+          1 {{ currency.name }}
+          <img [src]="'assets/images/' + currency.name + '.png'"
+               [alt]="currency.name + 'icon'" width="24" height="24" />
+          = {{ 1 / exchangeRates[currency.name] | number: '2.2-2' }} UAH
+          <img src="assets/images/UAH.png" alt="" width="24" height="24" />
+        </li>
+      </ul>
+      <ul>
+        <li *ngFor="let currency of currencies">
+          1 UAH
+          <img src="assets/images/UAH.png" alt="UAH icon" width="24" height="24" />
+          = {{ exchangeRates[currency.name] }} {{ currency.name }}
+          <img [src]="'assets/images/' + currency.name + '.png'"
+               [alt]="currency.name + 'icon'" width="24" height="24" />
+        </li>
+      </ul>
+    </div>
     <app-loader *ngIf="isLoading"></app-loader>
     <a routerLink="/about" routerLinkActive="active">About</a>
   </nav>
