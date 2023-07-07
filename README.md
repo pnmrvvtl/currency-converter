@@ -1,5 +1,4 @@
-# Currency Converter
-Testing project for ITOP1000 by @pnmrvvtl
+# Currency Converter by @pnmrvvtl
 
 Deploy of application: https://itop1000-pnmrvvtl-converter.netlify.app/
 
