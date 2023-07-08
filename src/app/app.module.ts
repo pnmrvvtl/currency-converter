@@ -4,18 +4,47 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 // routing
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // services
-import { CurrencyService } from './services';
+import { AuthService, CurrencyService } from './services';
 // components
-import { Converter, Footer, Header, Loader } from './components';
-import { AboutPage, ErrorPage, MainPage } from './views';
+import { Authentication, Converter, Footer, Header, Loader, Registration } from './components';
+import { AboutPage, AuthPage, ErrorPage, MainPage } from './views';
+// environment
+import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent, Header, Footer, MainPage, AboutPage, Loader, Converter, ErrorPage],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [CurrencyService],
+  declarations: [
+    AppComponent,
+    Header,
+    Footer,
+    MainPage,
+    AboutPage,
+    Loader,
+    Converter,
+    ErrorPage,
+    Authentication,
+    Registration,
+    AuthPage,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
+  providers: [CurrencyService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

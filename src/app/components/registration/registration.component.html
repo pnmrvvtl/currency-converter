@@ -1,0 +1,10 @@
+<h2>Registration</h2>
+<form (ngSubmit)="register()" #registrationForm="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" required [(ngModel)]="email" name="email">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Password" type="password" required [(ngModel)]="password" name="password">
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid">Register</button>
+</form>

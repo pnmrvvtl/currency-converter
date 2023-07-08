@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ExchangeRate, ExchangeRatesResponse } from '../../interfaces';
 // data
 import currencies from '../../../assets/currencies';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +18,7 @@ export class CurrencyService {
   constructor(private http: HttpClient) {}
 
   fetchExchangeRates(): Observable<void> {
-    /* I'm going to hide my safe info like this API_KEY in .env for example,
-    but now I don't want to waste your time for creating your own API_KEY
-    or getting it from me, so I'll just leave it like this
-    nevertheless it's free for me. But in real project I'm going to hide sensitive
-    data like that. */
-    const API_KEY = '7dGVZ4lxFgsd56Ct9pqdMAeA0CMluLYlFHJ76y2n';
+    const API_KEY = environment.currencyApiKey;
     return this.http
       .get<ExchangeRatesResponse>(
         `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}` +
