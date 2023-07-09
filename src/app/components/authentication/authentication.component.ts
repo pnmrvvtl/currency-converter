@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-authentication',
@@ -30,6 +31,21 @@ export class Authentication {
         this.isLoading = false;
       })
       .finally(() => {
+        this.isLoading = false;
+      });
+  }
+
+  googleLogin() {
+    this.isLoading = true;
+    this.afAuth
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(() => {
+        console.log('User logged in with Google successfully');
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      })
+      .catch((error: Error) => {
+        console.error('Error logging in with Google:', error);
         this.isLoading = false;
       });
   }

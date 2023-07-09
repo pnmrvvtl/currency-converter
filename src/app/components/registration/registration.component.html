@@ -20,10 +20,9 @@
     <mat-error *ngIf="repeatPasswordInput.value !== password">Passwords do not match.</mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary" type="submit"
-          [disabled]="!registrationForm.form.valid || repeatPassword !== password"
-    *ngIf="!isLoading"
+          [disabled]="!registrationForm.form.valid || repeatPassword !== password || isLoading"
   >
-    Register
+    <span *ngIf="!isLoading">Register</span>
+    <mat-spinner *ngIf="isLoading" diameter="20" color="accent"></mat-spinner>
   </button>
-  <app-loader *ngIf="isLoading"></app-loader>
 </form>

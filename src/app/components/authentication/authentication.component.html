@@ -10,10 +10,16 @@
     <mat-error *ngIf="passwordInput.errors?.['required']">Password is required.</mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary" type="submit"
-          [disabled]="!loginForm.form.valid"
-          *ngIf="!isLoading"
-  >
-    Register
+          [disabled]="!loginForm.form.valid || isLoading">
+    <span *ngIf="!isLoading">Login with Email and Password</span>
+    <mat-spinner *ngIf="isLoading" diameter="20" color="accent"></mat-spinner>
   </button>
-  <app-loader *ngIf="isLoading"></app-loader>
+
+  <button mat-raised-button color="primary"
+          (click)="googleLogin()"
+          [disabled]="isLoading"
+  >
+    <span *ngIf="!isLoading">Login with Google</span>
+    <mat-spinner *ngIf="isLoading" diameter="20" color="accent"></mat-spinner>
+  </button>
 </form>
