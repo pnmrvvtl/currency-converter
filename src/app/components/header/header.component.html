@@ -1,3 +1,4 @@
+<!-- todo: make work with pipes-->
 <header>
   <nav>
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Converter</a>
@@ -15,7 +16,7 @@
         <li *ngFor="let currency of currencies">
           1 UAH
           <img src="assets/images/UAH.png" alt="UAH icon" width="24" height="24" />
-          = {{ exchangeRates[currency.name] }} {{ currency.name }}
+          = {{ exchangeRates[currency.name] | number: '1.2-8'  }} {{ currency.name }}
           <img [src]="'assets/images/' + currency.name + '.png'"
                [alt]="currency.name + 'icon'" width="24" height="24" />
         </li>
@@ -23,6 +24,12 @@
     </div>
     <app-loader *ngIf="isLoading"></app-loader>
     <a routerLink="/about" routerLinkActive="active">About</a>
-    <a routerLink="/auth" routerLinkActive="active">Sign In/Sign Up</a>
+    <ng-container *ngIf="isAuthenticated; else signInLink">
+      <a (click)="logout()">Log Out</a>
+      <span>{{ userEmail }}</span>
+    </ng-container>
+    <ng-template #signInLink>
+      <a routerLink="/auth" routerLinkActive="active">Sign In/Sign Up</a>
+    </ng-template>
   </nav>
 </header>

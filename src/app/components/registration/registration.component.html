@@ -1,10 +1,29 @@
 <h2>Registration</h2>
 <form (ngSubmit)="register()" #registrationForm="ngForm">
   <mat-form-field>
-    <input matInput placeholder="Email" type="email" required [(ngModel)]="email" name="email">
+    <input matInput placeholder="Email" type="email" required [(ngModel)]="email" name="email" #emailInput="ngModel" email>
+    <mat-error *ngIf="emailInput.errors?.['required']">Email is required.</mat-error>
+    <mat-error *ngIf="emailInput.errors?.['email']">Please enter a valid email.</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Password" type="password" required [(ngModel)]="password" name="password">
+    <input matInput placeholder="Password" type="password" required [(ngModel)]="password" name="password" #passwordInput="ngModel"
+           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
+    <mat-error *ngIf="passwordInput.errors?.['required']">Password is required.</mat-error>
+    <mat-error *ngIf="passwordInput.errors?.['pattern']">
+      Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one digit, and one special symbol.
+    </mat-error>
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid">Register</button>
+  <mat-form-field>
+    <input matInput placeholder="Repeat Password" type="password" required [(ngModel)]="repeatPassword" name="repeatPassword"
+           [errorStateMatcher]="matcher" #repeatPasswordInput="ngModel">
+    <mat-error *ngIf="repeatPasswordInput.errors?.['required']">Repeat password is required.</mat-error>
+    <mat-error *ngIf="repeatPasswordInput.value !== password">Passwords do not match.</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit"
+          [disabled]="!registrationForm.form.valid || repeatPassword !== password"
+    *ngIf="!isLoading"
+  >
+    Register
+  </button>
+  <app-loader *ngIf="isLoading"></app-loader>
 </form>

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -11,18 +14,40 @@ export class Registration {
 
   password = '';
 
-  constructor(private afAuth: AngularFireAuth) {}
+  repeatPassword = '';
+
+  isLoading = false;
+
+  matcher: ErrorStateMatcher = {
+    isErrorState: (
+      control: FormControl | null,
+      form: FormGroupDirective | NgForm | null,
+    ): boolean => {
+      const invalidCtrl = Boolean(control && control.invalid && (control.dirty || control.touched));
+      const mismatch = Boolean(
+        control && control.parent && control.value !== control.parent.get('password')?.value,
+      );
+      return invalidCtrl || mismatch;
+    },
+  };
+
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   register() {
+    this.isLoading = true;
     this.afAuth
       .createUserWithEmailAndPassword(this.email, this.password)
       .then(() => {
         console.log('User registered successfully');
-        // You can perform additional actions here after successful registration
+        this.isLoading = false;
+        this.router.navigate(['/']);
       })
       .catch((error: Error) => {
         console.error('Error registering:', error);
-        // Handle error cases here
+        this.isLoading = false;
+      })
+      .finally(() => {
+        this.isLoading = false;
       });
   }
 }

@@ -1,6 +1,7 @@
 // libs
 import { Component, OnInit } from '@angular/core';
 // services
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CurrencyService } from '../../services';
 // data
 import currencies from '../../../assets/currencies';
@@ -17,7 +18,21 @@ export class Header implements OnInit {
 
   isLoading = true;
 
-  constructor(public currencyService: CurrencyService) {}
+  isAuthenticated = false;
+
+  userEmail = '';
+
+  constructor(public currencyService: CurrencyService, private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.userEmail = user.email || 'User';
+      } else {
+        this.isAuthenticated = false;
+        this.userEmail = '';
+      }
+    });
+  }
 
   ngOnInit() {
     this.updateExchangeRates();
@@ -36,5 +51,16 @@ export class Header implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  logout() {
+    this.afAuth
+      .signOut()
+      .then(() => {
+        console.log('User logged out successfully');
+      })
+      .catch((error: Error) => {
+        console.error('Error logging out:', error);
+      });
   }
 }
