@@ -4,5 +4,6 @@ import { Loader } from './loader/loader.component';
 import { Converter } from './converter/converter.component';
 import { Authentication } from './authentication/authentication.component';
 import { Registration } from './registration/registration.component';
+import { CurrencyPicker } from './currency-picker/currency-picker.component';
 
-export { Header, Footer, Loader, Converter, Authentication, Registration };
+export { Header, Footer, Loader, Converter, Authentication, Registration, CurrencyPicker };

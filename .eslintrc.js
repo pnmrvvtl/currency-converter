@@ -15,5 +15,6 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-useless-constructor": "off",
     "max-len": ["error", { code: 100 }],
+    "no-underscore-dangle": "off",
   },
 };
